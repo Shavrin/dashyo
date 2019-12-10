@@ -1,15 +1,9 @@
 import React from 'react';
-import store from './store/index';
-import { addWindow, closeWindow } from './actions/index';
+import { useSelector } from 'react-redux';
+import Window from './Window';
 
 function App() {
-  store.subscribe(()=>{console.log(store.getState().windows)});
-  store.dispatch( addWindow({
-    id: store.getState().windows.length,
-    title: 'basic window'
-  }));
-
-  store.dispatch(closeWindow(0));
+  const windows = useSelector(state => state.windows);
   const styles = {
     height: '100vh',
     width: '100vw',
@@ -17,10 +11,11 @@ function App() {
     border: '5px solid white'
   };
 
+
   return (
     <React.Fragment>
       <main style={styles}>
-       options
+        {windows.map(window => <Window key={window.id}></Window>)}
       </main>
     </React.Fragment>
   );
