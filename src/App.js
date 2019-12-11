@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Window from './Window';
+import Sidebar from './Sidebar';
 
 function App() {
   const windows = useSelector(state => state.windows);
@@ -11,12 +12,12 @@ function App() {
     border: '5px solid white'
   };
 
-
   return (
     <React.Fragment>
       <main style={styles}>
         {windows.map(window => <Window key={window.id}></Window>)}
       </main>
+      <Sidebar></Sidebar>
     </React.Fragment>
   );
 }

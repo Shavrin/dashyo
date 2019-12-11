@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
 import displace from 'displacejs';
-import { relative } from 'path';
 
 export default function Window() {
     const [title, setTitle] = useState('unnamed window');
@@ -13,7 +12,9 @@ export default function Window() {
         width: size.width,
         position: 'absolute',
         userSelect: 'none',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        borderRadius: '10px',
+        border: '1px solid white'
     }
 
     const iframeStyle = {
