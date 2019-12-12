@@ -12,13 +12,14 @@ export default function Window() {
     const WidgetTopBar = styled.div`
         position: absolute;
         width: 100%;
-        height: 20px;
-        top: -20px;
-        background-color: blue;
+        height: 25px;
+        top: -25px;
+        background-color: lightblue;
         display:flex;
         justify-content: space-between;
         align-items: center;
-        border-radius: 10px 10px 0 0 ;
+        border-radius: 10px 10px 0 0;
+        padding: 2px 2px 0 5px;
     `;
     const WidgetWindow = styled.div`
         height: ${size.height + 10 + 'px'};
@@ -26,7 +27,7 @@ export default function Window() {
         position: absolute;
         user-select: none;
         cursor: pointer;
-        background-color: white;
+        background-color: lightblue;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -38,6 +39,14 @@ export default function Window() {
     `;
     const WidgetCloseButton = styled.img`
         height: 100%;
+        border-radius: 50px;
+        background-color: transparent;
+        &:hover {
+            background-color: red;
+        }
+        &:active {
+            background-color: pink;
+        }
     `;
 
     const WidgetIframe = styled.iframe`
@@ -45,7 +54,7 @@ export default function Window() {
         width: 95%;
         border: none;
         border-radius: 10px;
-        background-color: grey;
+        background-color: white;
     `;
 
     const windowElement = useRef(null);
