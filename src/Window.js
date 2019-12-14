@@ -1,13 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react';
 import displace from 'displacejs';
 import styled from 'styled-components';
+import store from './store';
+import { closeWindow } from './actions';
 
 
-export default function Window() {
+const Window = React.memo(function ({windowId, pos}) {
     const [title, setTitle] = useState('unnamed window');
     const [size, setSize] = useState({width: 250, height: 200});
-    const [position, setPosition] = useState({x: 50, y: 50});
-
+    const [position, setPosition] = useState(pos);
 
     const WidgetTopBar = styled.div`
         position: absolute;
@@ -22,8 +23,8 @@ export default function Window() {
         padding: 2px 2px 0 5px;
     `;
     const WidgetWindow = styled.div`
-        height: ${size.height + 10 + 'px'};
-        width: ${size.width + 'px'};
+        height: ${size.height + 10}px;
+        width: ${size.width}px;
         position: absolute;
         user-select: none;
         cursor: pointer;
@@ -32,6 +33,8 @@ export default function Window() {
         align-items: center;
         justify-content: center;
         border-radius: 0 0 10px 10px;
+        left: ${position.x}px;
+        top: ${position.y}px;
     `;
 
 
@@ -58,22 +61,30 @@ export default function Window() {
     `;
 
     const windowElement = useRef(null);
+    const iframeElement = useRef(null);
+
     useEffect(()=>{
         displace(windowElement.current, {
             constrain: true,
             onMouseDown: () => {
-                windowElement.current.style['pointer-events'] = 'none';
-
+                iframeElement.current.style['pointer-events'] = 'none';
             },
             onMouseUp: () => {
-                windowElement.current.style['pointer-events'] = 'auto';
+                iframeElement.current.style['pointer-events'] = 'auto';
         }});
     });
+
+    function closeClickHandler() {
+        store.dispatch(closeWindow(windowId));
+    }
+
     return (<WidgetWindow ref={windowElement}>
         <WidgetTopBar>
             <WidgetTitle>{title}</WidgetTitle>
-            <WidgetCloseButton src='./svg/closeIcon.svg'></WidgetCloseButton>
+            <WidgetCloseButton onClick={closeClickHandler} src='./svg/closeIcon.svg'></WidgetCloseButton>
         </WidgetTopBar>
-        <WidgetIframe src="./widgets/timer.html"></WidgetIframe>
+        <WidgetIframe ref={iframeElement} src="./widgets/timer.html"></WidgetIframe>
     </WidgetWindow>);
-}
+});
+
+export default Window;

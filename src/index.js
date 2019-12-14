@@ -15,12 +15,31 @@ ReactDOM.render(
 // only for testing purposes
 store.dispatch( addWindow({
     id: store.getState().windows.length,
-    title: 'basic window'
-  }));
-  store.dispatch( addWindow({
-    id: store.getState().windows.length,
-    title: 'basic 2'
-  }));
+    title: 'basic window',
+    position: {
+      x: 50,
+      y: 125
+    }
+}));
+
+store.dispatch( addWindow({
+  id: store.getState().windows.length,
+  title: 'basic window',
+  position: {
+    x: 200,
+    y: 125
+  }
+}));
+
+store.dispatch( addWindow({
+  id: store.getState().windows.length,
+  title: 'basic window',
+  position: {
+    x: 100,
+    y: 125
+  }
+}));
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
