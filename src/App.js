@@ -1,9 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import store from './store/index';
 import Window from './Window';
 import Sidebar from './Sidebar';
-import {closeWindow} from './actions/index';
 
 function App() {
   const windows = useSelector(state => state.windows);
@@ -20,7 +18,7 @@ function App() {
           {windows.map(window =>
           <Window
             key={window.id}
-            windowId={window.id}
+            id={window.id}
             pos={window.position}
           >
 

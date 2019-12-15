@@ -5,7 +5,7 @@ import store from './store';
 import { closeWindow } from './actions';
 
 
-const Window = React.memo(function ({windowId, pos}) {
+const Window = React.memo(function ({id, pos}) {
     const [title, setTitle] = useState('unnamed window');
     const [size, setSize] = useState({width: 250, height: 200});
     const [position, setPosition] = useState(pos);
@@ -75,7 +75,7 @@ const Window = React.memo(function ({windowId, pos}) {
     });
 
     function closeClickHandler() {
-        store.dispatch(closeWindow(windowId));
+        store.dispatch(closeWindow(id));
     }
 
     return (<WidgetWindow ref={windowElement}>
